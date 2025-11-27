@@ -149,7 +149,7 @@ export default function DataPhones() {
 ):null}
      
 <dialog id="my_modal_1" className=" modal fixed inset-0 bg-black/70 flex justify-center items-center animate__animated animate__fadeIn " onClick={()=> document.querySelector('#my_modal_1').close() } >
-  <div className="modal-box  w-[500px] p-4 rounded bg-gray-700 shadow border flex flex-col items-center justify-center gap-4  animate__animated animate__slideInDown animate__slow" onClick={(event)=> event.stopPropagation(false) }> 
+  <div className="modal-box  w-[500px] p-4 rounded bg-gray-700 shadow border flex flex-col items-center justify-center gap-4 animate__animated animate__slideInDown animate__slow" onClick={(event)=> event.stopPropagation(false) }> 
     <h3 className="font-bold text-lg text-amber-50">Edit Phone Data</h3>
 
     <div className="modal-action ">
