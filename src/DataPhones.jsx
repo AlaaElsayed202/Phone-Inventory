@@ -63,7 +63,7 @@ export default function DataPhones() {
          localStorage.setItem('Phones',JSON.stringify(copy));
       }
 
-      const [EditPhoneIndex, setEditPhoneIndex] = useState(null);
+      const [EditPhoneIndex, setEditPhoneIndex] = useState();
       const OpenEditPhone = (index)=> {
         setEditPhoneIndex(index);
       document.getElementById('my_modal_1').showModal()
@@ -76,15 +76,15 @@ export default function DataPhones() {
 
       const SaveNewData = () => {
          let NewPhoneData = {
-          Name:nameInput.current.value ,
-          Price:+priceInput.current.value ,
-          Qty:+qtyInput.current.value
+          Name:nameInput.current.value  ||0,
+          Price:+priceInput.current.value ||0,
+          Qty:+qtyInput.current.value||0
         };
         let copy = [...Phones];
             copy[EditPhoneIndex] = NewPhoneData;
             setPhones(copy);
             localStorage.setItem('Phones',JSON.stringify(copy));
-            
+
         Swal.fire({
            background: "#1e1e1e",
       color: "#ffffff",
@@ -94,7 +94,7 @@ export default function DataPhones() {
 });
          setNewPhoneModelIndex(false);
          
-      }
+      };
   return (
 
   <div className='bg-black min-h-screen pt-8 px-9'>
