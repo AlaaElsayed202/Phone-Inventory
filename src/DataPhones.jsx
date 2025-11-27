@@ -6,39 +6,39 @@ import '@sweetalert2/theme-dark/dark.css';
 export default function DataPhones() {
     const [Phones, setPhones] = useState(JSON.parse(localStorage.getItem('Phones'))|| []);
 
-    const RemovePhone = (index) =>{
-     
-      let Copy = [...Phones];
-        Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!",
-   background: "#1e1e1e",
-    color: "#ffffff"  
-}).then((result) => {
-       
-       Copy.splice(index,1);
-      setPhones(Copy);
-       localStorage.setItem('Phones',JSON.stringify(Copy));  
+    const RemovePhone = (index) => {
+  let Copy = [...Phones];
 
-
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success",
-        background: "#1e1e1e",
-      color: "#ffffff"
-    });
-  }
-});
-     
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+    background: "#1e1e1e",
+    color: "#ffffff"
+  }).then((result) => {
+    if (result.isConfirmed) {
       
+      Copy.splice(index, 1);
+      setPhones(Copy);
+      localStorage.setItem('Phones', JSON.stringify(Copy));
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+        background: "#1e1e1e",
+        color: "#ffffff"
+      });
     }
+  });
+};
+
+      
+    
 
     const [NewPhoneModelIndex,setNewPhoneModelIndex] = useState(false)
 
@@ -65,22 +65,26 @@ export default function DataPhones() {
 
       const [EditPhoneIndex, setEditPhoneIndex] = useState(null);
       const OpenEditPhone = (index)=> {
-        setEditPhoneIndex(index)
+        setEditPhoneIndex(index);
       document.getElementById('my_modal_1').showModal()
         let oldData = Phones[index]
        nameInput.current.value  = oldData.Name;
        priceInput.current.value = oldData.Price;
        qtyInput.current.value = oldData.Qty;
 
-      }
+      };
 
       const SaveNewData = () => {
-         let NewPhoneData = {Name:nameInput.current.value ,
-                        Price:+priceInput.current.value ,
-                        Qty:+qtyInput.current.value};
+         let NewPhoneData = {
+          Name:nameInput.current.value ,
+          Price:+priceInput.current.value ,
+          Qty:+qtyInput.current.value
+        };
         let copy = [...Phones];
             copy[EditPhoneIndex] = NewPhoneData;
-            setPhones(copy)
+            setPhones(copy);
+            localStorage.setItem('Phones',JSON.stringify(copy));
+            
         Swal.fire({
            background: "#1e1e1e",
       color: "#ffffff",
@@ -89,7 +93,7 @@ export default function DataPhones() {
   draggable: true
 });
          setNewPhoneModelIndex(false);
-         localStorage.setItem('Phones',JSON.stringify(copy));
+         
       }
   return (
 
